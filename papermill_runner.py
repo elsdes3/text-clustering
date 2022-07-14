@@ -14,6 +14,7 @@ import papermill as pm
 
 PROJ_ROOT_DIR = os.getcwd()
 output_notebook_dir = os.path.join(PROJ_ROOT_DIR, "executed_notebooks")
+raw_data_dir = os.path.join(PROJ_ROOT_DIR, "data", "raw")
 topics = ["biology", "cooking", "crypto", "diy", "robotics", "travel"]
 
 zero_nb_name = "01_get_data.ipynb"
@@ -21,9 +22,9 @@ one_nb_name = "02_eda.ipynb"
 
 
 zero_dict = dict(
-    data_dir="data/raw",
+    raw_data_dir="data/raw",
     topics=topics,
-    zip_filepaths=[f"data/raw/{t}.csv.zip" for t in topics],
+    zip_filepaths=[f"{raw_data_dir}/{t}.csv.zip" for t in topics],
     nltk_stopwords_dir=os.path.join(
         os.path.expanduser("~"), "nltk_data", "corpora", "stopwords"
     ),
@@ -31,6 +32,7 @@ zero_dict = dict(
 one_dict = dict(
     topics=topics,
     num_samples_to_use=86000,
+    raw_data_filepath=f"{raw_data_dir}/text_clustering_data.parquet.gzip",
     n_clusters=6,
     kmeans_random_state=42,
 )
